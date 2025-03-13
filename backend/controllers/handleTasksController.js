@@ -1,6 +1,6 @@
 const db = require("../config/db");
 
-// Create a new task
+// create a new task
 exports.createTask = async (req, res) => {
   try {
 
