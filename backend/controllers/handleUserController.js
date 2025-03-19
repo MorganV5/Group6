@@ -8,13 +8,6 @@ exports.registerUser = async (req, res) => {
     // get the name email and password from the post request body
     let {name, email, password} = req.body;
 
-    // just for testing
-    if (!name || !email || !password) {
-      name = "Test User",
-      email = "testuser@example.com",
-      password = "testpassword123"
-    }
-
     // if user exists send an error back saying it is registered
     const [existingUser] = await db.query("SELECT email FROM users WHERE email = ?", [email]);
     if (existingUser.length > 0) {
