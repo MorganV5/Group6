@@ -5,6 +5,9 @@ npm install
 download mysql for local testing https://dev.mysql.com/downloads/mysql/
 
 after installing mysql:
+open settings
+go to bottom and click mysql
+click start server 
 open terminal
 sudo /usr/local/mysql/support-files/mysql.server start
 
@@ -29,7 +32,3 @@ post
 http://localhost:3000/api/tasks/createTask
 get
 http://localhost:3000/api/tasks/getTasks
-
-make database using the createTables.sql file
-default mysql port 3306
-
