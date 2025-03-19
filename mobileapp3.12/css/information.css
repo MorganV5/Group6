@@ -1,0 +1,145 @@
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+/* 主容器 */
+.container {
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* 标题 */
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1E40AF;
+    margin-bottom: 15px;
+}
+
+/* 图片上传容器 */
+.upload-container {
+    width: 120px;
+    height: 120px;
+    border: 2px dashed #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+.upload-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: none;
+}
+.upload-container p {
+    position: absolute;
+    color: #888;
+    font-size: 12px;
+}
+
+/* 隐藏文件上传按钮 */
+#fileInput {
+    display: none;
+}
+
+/* 标签 */
+label {
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* 输入框 */
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #F3F4F6;
+    font-size: 16px;
+}
+
+/* 文本框 */
+textarea {
+    resize: none;
+    height: 60px;
+}
+
+/* 按钮容器 */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+/* 按钮 */
+.btn {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    margin: 5px;
+}
+
+/* 取消按钮 */
+.cancel {
+    background-color: white;
+    border: 1px solid #888;
+    color: #333;
+}
+
+/* 注册按钮 */
+.register {
+    background-color: #1E40AF;
+    color: white;
+}
+
+/* 按钮交互 */
+.cancel:hover {
+    background-color: #f0f0f0;
+}
+.register:hover {
+    background-color: #153e90;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    input, textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
+    .btn {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+}

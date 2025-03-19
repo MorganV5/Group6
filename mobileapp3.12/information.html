@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomi Registration</title>
+    <link rel="stylesheet" href="css/information.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Roomi</h1>
+
+        <!-- 图片上传 -->
+        <div class="upload-container" onclick="document.getElementById('fileInput').click();">
+            <input type="file" id="fileInput" accept="image/*" onchange="previewImage(event)">
+            <img id="profileImage" src="" alt="Upload Photo">
+            <p class="upload-text">Click to upload photo</p>
+        </div>
+
+        <!-- 姓名输入框 -->
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Ronald">
+
+        <!-- 电话号码（可选） -->
+        <label for="phone">Phone Number (Optional)</label>
+        <input type="tel" id="phone" placeholder="+353 12 345 6789">
+
+        <!-- 关于我 -->
+        <label for="about">About Me</label>
+        <textarea id="about" placeholder="Hi, I'm Ronald, your new flatmate!"></textarea>
+
+        <!-- 按钮 -->
+        <div class="buttons">
+            <button class="btn cancel">Cancel</button>
+            <button class="btn register">Register</button>
+        </div>
+    </div>
+
+    <script src="js/information.js"></script>
+</body>
+</html>

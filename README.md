@@ -29,3 +29,7 @@ post
 http://localhost:3000/api/tasks/createTask
 get
 http://localhost:3000/api/tasks/getTasks
+
+make database using the createTables.sql file
+default mysql port 3306
+

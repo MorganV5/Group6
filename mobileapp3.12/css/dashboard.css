@@ -1,0 +1,169 @@
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #F8FAFC; /* 浅灰色背景 */
+    margin: 0;
+    padding: 0;
+}
+
+/* 主容器 */
+.container {
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+/* 标题 */
+h2 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+/* 副标题 */
+.subtitle {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* 任务筛选按钮 */
+.task-filter {
+    display: flex;
+    background-color: #E5E7EB;
+    border-radius: 20px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.task-filter button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.task-filter .active {
+    background-color: #1E40AF;
+    color: white;
+    font-weight: bold;
+}
+
+/* 任务列表 */
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-list li {
+    display: flex;
+    align-items: center;
+    background-color: #F3F4F6;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.task-list li:hover {
+    background-color: #E5E7EB;
+}
+
+/* 任务名称 */
+.task-list li span {
+    flex: 1;
+    font-size: 16px;
+}
+
+/* 任务时间 */
+.task-list li small {
+    font-size: 14px;
+    color: gray;
+}
+
+/* 已完成任务 */
+.completed-tasks {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.completed-tasks li {
+    display: flex;
+    align-items: center;
+    color: gray;
+    text-decoration: line-through;
+    margin-bottom: 5px;
+}
+
+.completed-tasks li::before {
+    content: "✔️";
+    color: green;
+    margin-right: 10px;
+}
+
+/* 添加任务按钮 */
+#addTask {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #1E40AF;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#addTask:hover {
+    background-color: #153E90;
+}
+
+/* 底部导航栏 */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-top: 1px solid #E5E7EB;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: gray;
+    font-size: 14px;
+    text-align: center;
+}
+
+.bottom-nav .active {
+    color: #1E40AF;
+    font-weight: bold;
+}
+
+/* 响应式适配 */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+    h2 {
+        font-size: 22px;
+    }
+    .task-filter button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
