@@ -1,4 +1,4 @@
-const db = require("../config/db");
+const user = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -8,19 +8,25 @@ exports.registerUser = async (req, res) => {
     // get the name email and password from the post request body
     let {name, email, password} = req.body;
 
+    // just for testing
+    if (!name || !email || !password) {
+      name = "Test User";
+      email = "testuser@example.com";
+      password = "testpassword123";
+    }
+
     // if user exists send an error back saying it is registered
-    const [existingUser] = await db.query("SELECT email FROM users WHERE email = ?", [email]);
+    const existingUser = await user.getUserByEmail(email);
     if (existingUser.length > 0) {
-      return res.status(400).json({ error: "Email already registered"});
+      return res.status(400).json({error: "Email already registered"});
     }
 
     // encrypt the password
-    const encryptPassword = await bcrypt.hash(password, 10);
+    const encryptedPassword = await bcrypt.hash(password, 10);
 
     // query to insert user details
-    const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-    // add the values into the query and then use it
-    await db.query(sql, [name, email, encryptPassword]);
+    await user.createUser({name, email, password: encryptedPassword});
+
     // sebd a message back 
     res.status(201).json({message: "Test user registered successfully", name, email});
   } catch (error) {
@@ -40,14 +46,14 @@ exports.loginUser = async (req, res) => {
     }
 
     // check to see if email is registered
-    const [user] = await db.query("SELECT * FROM users WHERE email = ?", email);
-    if (user.length === 0) {
+    const username = await user.getUserByEmail(email);
+    if (username.length === 0) {
       // if not send an error
       return res.status(401).json({error: "Invalid email or password"});
     }
 
     // check if the password is correct
-    const isPasswordValid = await bcrypt.compare(password, user[0].password);
+    const isPasswordValid = await bcrypt.compare(password, username[0].password);
 
     if (!isPasswordValid) {
       // if not then return an error
@@ -55,9 +61,9 @@ exports.loginUser = async (req, res) => {
     }
 
     // generate jwt token for login
-    console.log(user[0])
+    console.log(username[0])
     const token = jwt.sign(
-      {user_id: user[0].id, email: user[0].email},
+      {user_id: username[0].id, email: username[0].email, flat_id: username[0].flat_id},
       process.env.JWT_SECRET
     );
 
