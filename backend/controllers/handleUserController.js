@@ -1,40 +1,83 @@
 const user = require("../models/user");
+const flat = require("../models/flat");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// register user
-exports.registerUser = async (req, res) => {
-  try {
-    // get the name email and password from the post request body
-    let {name, email, password} = req.body;
+const multer = require("multer");
 
-    // just for testing
-    if (!name || !email || !password) {
-      name = "Test User";
-      email = "testuser@example.com";
-      password = "testpassword123";
-    }
-
-    // if user exists send an error back saying it is registered
-    const existingUser = await user.getUserByEmail(email);
-    if (existingUser.length > 0) {
-      return res.status(400).json({error: "Email already registered"});
-    }
-
-    // encrypt the password
-    const encryptedPassword = await bcrypt.hash(password, 10);
-
-    // query to insert user details
-    await user.createUser({name, email, password: encryptedPassword});
-
-    // sebd a message back 
-    res.status(201).json({message: "Test user registered successfully", name, email});
-  } catch (error) {
-    console.error(error);
-    // if something wrong send error back
-    res.status(500).json({error: "Error please try again"});
+const storage = multer.diskStorage({
+  destination: './public/uploads/',
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
   }
-};
+});
+const upload = multer({storage});
+
+exports.registerUser = [
+  upload.single('profile_picture'),
+  async (req, res) => {
+    try {
+      const {name, email, password, flatCode, phone, aboutMe} = req.body;
+      const profile_picture = req.file ? `/uploads/${req.file.filename}` : null;
+
+      // check al values arent empty
+      if (!name || !email || !password || !flatCode) {
+        return res.status(400).json({message: "All required fields must be filled."});
+      }
+
+      // check for existing user
+      const existing = await user.getUserByEmail(email);
+      if (existing && existing.length > 0) {
+        return res.status(400).json({message: "Email is already registered."});
+      }
+
+      // check if flat with this invite code exists
+      let flatDetails = await flat.getFlatFromInviteCode(flatCode); 
+
+      if (!flatDetails || flatDetails.length === 0) {
+
+        // if not then make new flat with users name
+        const flatName = `${name}'s Flat`;
+        const [createdFlat] = await flat.createFlat(flatName, flatCode);
+
+        flatDetails = [{id: createdFlat.id}];
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      // create the usder and assign them to exisiting or new flat
+      const [newUser] = await user.createUser({
+        name,
+        email,
+        password: hashedPassword,
+        flat_id: flatDetails[0].id,
+        phone,
+        about_me: aboutMe,
+        profile_picture
+      });
+
+
+      const token = jwt.sign({
+        user_id: newUser.insertId,
+        email,
+        flat_id: flatDetails[0].id,
+        userName: name  
+      }, process.env.JWT_SECRET);
+      // set cookie
+      res.cookie("authToken", token, {
+        httpOnly: true,   
+        secure: true,     
+        sameSite: "Strict", 
+        // last for 1 hour
+        maxAge: 3600000  
+      });
+      res.status(201).json({message: "Registration successful."});
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({message: "Server error during registration."});
+    }
+  }
+];
+
 
 exports.loginUser = async (req, res) => {
   try {
@@ -61,9 +104,9 @@ exports.loginUser = async (req, res) => {
     }
 
     // generate jwt token for login
-    console.log(username[0])
+
     const token = jwt.sign(
-      {user_id: username[0].id, email: username[0].email, flat_id: username[0].flat_id},
+      {user_id: username[0].id, email: username[0].email, flat_id: username[0].flat_id, userName: username[0].name},
       process.env.JWT_SECRET
     );
 
@@ -83,3 +126,22 @@ exports.loginUser = async (req, res) => {
     res.status(500).json({error: "Login error"});
   }
 };
+
+exports.getallUsers = async (req, res) => {
+  try {
+    const flatId = req.user.flat_id;
+
+    if (!flatId) {
+      return res.status(400).json({message: "User is not assigned to a flat"});
+    }
+
+    const users = await user.getallUsers(flatId);
+    res.json(users);
+  } catch (error) {
+    console.error("Error fetching users in flat:", error);
+    res.status(500).json({message: "Server error"});
+  }
+};
+
+
+
