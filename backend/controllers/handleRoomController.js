@@ -21,3 +21,4 @@ exports.getRoomsByFlatId = async (req, res) => {
     res.status(500).json({error: "Unable to retrieve rooms"});
   }
 };
+

@@ -1,14 +1,12 @@
-CREATE DATABASE household_tasks;
-
-USE household_tasks;
-
 CREATE TABLE users (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     phone VARCHAR(20),
-    profile_picture VARCHAR(255)
+    profile_picture VARCHAR(255),
+    ADD COLUMN flat_id INT,
+    ADD FOREIGN KEY (flat_id) REFERENCES flat(id) ON DELETE SET NULL;
 );
 
 CREATE TABLE flat (
@@ -45,6 +43,8 @@ CREATE TABLE tasks (
     assigned_to_id INTEGER,
     FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (assigned_to_id) REFERENCES users(id) ON DELETE SET NULL
+    ADD COLUMN flat_id INT,
+    ADD FOREIGN KEY (flat_id) REFERENCES flat(id) ON DELETE CASCADE;
 );
 
 CREATE TABLE status (
