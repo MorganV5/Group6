@@ -1,0 +1,137 @@
+/* 页面主容器 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8fafc;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.gallery-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* 标题和描述 */
+.gallery-container h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+  color: #1e3a8a;
+}
+
+.gallery-container p {
+  color: #6b7280;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* 文件输入框 */
+input[type="file"] {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/* 上传按钮 */
+#uploadBtn {
+  margin-top: 10px;
+  padding: 12px 24px;
+  background-color: #1e40af;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#uploadBtn:hover {
+  background-color: #153e90;
+}
+
+/* 预览区域样式 */
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.image-preview img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #e5e7eb;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Tab Bar */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 402px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 70px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #e0e0e0;
+  z-index: 999;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tab-item img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(10%) saturate(500%)
+    hue-rotate(180deg) brightness(90%) contrast(90%);
+}
+
+.tab-item span {
+  font-size: 11px;
+  color: #888;
+}
+
+.tab-item.active span {
+  color: #0096ff;
+}
+
+.tab-item.active img {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%)
+    hue-rotate(190deg) brightness(100%) contrast(110%);
+}
+
+/* 响应式 */
+@media screen and (max-width: 480px) {
+  .gallery-container h2 {
+    font-size: 22px;
+  }
+
+  #uploadBtn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .image-preview img {
+    width: 80px;
+    height: 80px;
+  }
+}

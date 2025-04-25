@@ -1,0 +1,192 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+  }
+  
+/* 顶部图片作为头图 */
+.hero-image-wrapper {
+    width: 100%;
+    height: 350px; /* 设置一个固定高度 */
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 裁剪多余部分，保持图片铺满 */
+    display: block;
+  }
+  
+  
+  /* 卡片内容 */
+  .task-card {
+    background: white;
+    margin-top: -60px;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+  }
+  .hero-image-wrapper {
+    position: relative; /* 用于内部绝对定位 */
+    width: 100%;
+    height: 450px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+  
+  .hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+  
+  /* 悬浮返回按钮样式 */
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    text-decoration: none;
+  }
+  
+  .back-arrow {
+    width: 40px;
+    height: 40px;
+    background-color: #F3F4F6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4B5563;
+  }
+  
+  .back-arrow:hover {
+    background-color: #E5E7EB;
+  }
+  .task-meta {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f3f4f6;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 90px;
+  }
+  
+  .meta-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .meta-text small {
+    display: block;
+    color: #6b7280;
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+  
+  .meta-text p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  /* 按钮行 */
+  .button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    transition: 0.3s ease;
+  }
+  
+  .btn.outline {
+    background-color: white;
+    border: 1px solid #cbd5e1;
+    color: #111827;
+  }
+  
+  .btn.filled {
+    background-color: #2643d3;
+    color: white;
+  }
+  
+/* Tab Bar */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 402px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 70px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #e0e0e0;
+  z-index: 999;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tab-item img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(10%) saturate(500%)
+    hue-rotate(180deg) brightness(90%) contrast(90%);
+}
+
+.tab-item span {
+  font-size: 11px;
+  color: #888;
+}
+
+.tab-item.active span {
+  color: #0096ff;
+}
+
+.tab-item.active img {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%)
+    hue-rotate(190deg) brightness(100%) contrast(110%);
+}

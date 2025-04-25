@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Task Photos</title>
+  <link rel="stylesheet" href="css/taskDonephoto.css" />
+</head>
+<body>
+
+  <main class="gallery-container">
+    <h2>Upload Task Photos</h2>
+    <p>Share what you've done for this task!</p>
+
+    <!-- 图片预览区域 -->
+    <div id="preview" class="image-preview"></div>
+
+    <!-- 图片上传输入 -->
+    <input type="file" id="photoInput" name="photos" multiple accept="image/*" />
+
+    <!-- 提交按钮 -->
+    <button id="uploadBtn">Upload</button>
+  </main>
+
+  <script>
+    const photoInput = document.getElementById("photoInput");
+    const preview = document.getElementById("preview");
+    const uploadBtn = document.getElementById("uploadBtn");
+  
+    const params = new URLSearchParams(window.location.search);
+    const taskId = params.get("task");
+    const progressTaskId = params.get("progress");
+  
+    if (!taskId || !progressTaskId) {
+      alert("Missing task or progress ID.");
+    }
+  
+    // 图片预览
+    photoInput.addEventListener("change", () => {
+      preview.innerHTML = "";
+      [...photoInput.files].forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  
+    // 逐张上传逻辑
+    uploadBtn.addEventListener("click", async () => {
+      const files = [...photoInput.files];
+      if (!files.length) return alert("Please select at least one photo.");
+  
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append("task_id", taskId);
+        formData.append("progress_task_id", progressTaskId);
+        formData.append("photos", file); // 注意仍然用 photos 字段
+  
+        try {
+          const res = await fetch("/api/task-photos/upload", {
+            method: "POST",
+            body: formData
+          });
+  
+          const result = await res.json();
+          if (!res.ok) {
+            alert("❌ Failed to upload one photo: " + result.message);
+            return; // 停止上传
+          }
+        } catch (err) {
+          console.error("❌ Upload failed:", err);
+          alert("❌ Upload failed.");
+          return;
+        }
+      }
+  
+      alert("✅ All photos uploaded successfully!");
+window.location.href = `task_comment.html?task=${taskId}&progress=${progressTaskId}`;
+
+    });
+  </script>
+  
+</body>
+</html>

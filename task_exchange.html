@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply for Task Exchange</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 16px;
+      max-width: 480px;
+      margin: auto;
+      background-color: #f5f5f5;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .task-box {
+      background: #aab2c5;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .task-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .task-text {
+      text-align: left;
+      color: white;
+      font-size: 15px;
+    }
+
+    .task-text p {
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .due-date {
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-left: 10px;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      font-size: 16px;
+      border-radius: 6px;
+    }
+
+    select {
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #2b54d1;
+      color: white;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #1f3aa0;
+      cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .task-text {
+        font-size: 14px;
+      }
+
+      .avatar {
+        width: 38px;
+        height: 38px;
+      }
+
+      select, button {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Apply for Task Exchange</h2>
+
+  <div class="task-box">
+    <div class="task-row">
+      <div class="task-text">
+        <p id="taskName">Loading...</p>
+        <p id="taskDueDate" class="due-date"></p>
+      </div>
+      <img id="avatar" class="avatar" src="/img/default.png" />
+    </div>
+  </div>
+
+  <label for="assignSelect">Assign to</label>
+  <select id="assignSelect">
+    <option value="">Loading users...</option>
+  </select>
+
+  <button id="submitBtn">Request exchange</button>
+
+  <script>
+    const taskId = new URLSearchParams(window.location.search).get("task");
+
+    const taskName = document.getElementById("taskName");
+    const taskDueDate = document.getElementById("taskDueDate");
+    const avatar = document.getElementById("avatar");
+    const assignSelect = document.getElementById("assignSelect");
+    const submitBtn = document.getElementById("submitBtn");
+
+    async function loadTask() {
+      const res = await fetch(`/api/task-exchange/${taskId}`);
+      const data = await res.json();
+      taskName.textContent = data.name;
+      const dateObj = new Date(data.due_date);
+      const day = String(dateObj.getDate()).padStart(2, '0');
+      const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const year = dateObj.getFullYear();
+      taskDueDate.textContent = `Due ${day} - ${month} - ${year}`;
+      avatar.src = data.profile_picture || "/img/default.png";
+    }
+
+    async function loadUsers() {
+      const res = await fetch(`/users`);
+      const users = await res.json();
+      assignSelect.innerHTML = users
+        .map(user => `<option value="${user.id}">${user.name}</option>`)
+        .join("");
+    }
+
+    submitBtn.addEventListener("click", async () => {
+      const assigned_to_id = assignSelect.value;
+      if (!assigned_to_id) {
+        alert("Please select a user");
+        return;
+      }
+
+      const res = await fetch(`/api/task-exchange/${taskId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ assigned_to_id })
+      });
+
+      const data = await res.json();
+      alert(data.message);
+      window.location.href = "dashboard.html";
+    });
+
+    loadTask();
+    loadUsers();
+  </script>
+</body>
+</html>

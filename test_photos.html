@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Photo Test</title>
+  <style>
+    img {
+      max-width: 300px;
+      display: block;
+      margin: 10px auto;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center;">🖼️ Photos for progress = 2</h1>
+  <div id="photoContainer" style="text-align: center;"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const res = await fetch("/api/progress-task-photos/2");  // ✅ 进度ID为2
+        const photos = await res.json();
+
+        console.log("✅ 结果：", photos);
+
+        const container = document.getElementById("photoContainer");
+
+        if (!photos.length) {
+          container.innerHTML = "<p>No photos found.</p>";
+          return;
+        }
+
+        photos.forEach(photo => {
+          const img = document.createElement("img");
+          img.src = photo.photo_url;
+          container.appendChild(img);
+        });
+      } catch (err) {
+        console.error("❌ 获取失败:", err);
+      }
+    });
+  </script>
+</body>
+</html>

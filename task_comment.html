@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Comment</title>
+  <link rel="stylesheet" href="css/task_comment.css" />
+</head>
+<body>
+  <main class="main-container">
+    <h2>Task Comment</h2>
+
+    <div class="slideshow-container-comment">
+      <span class="date-time" id="photoTime">--</span>
+      <img id="photoDisplay" alt="Task Photo" />
+    </div>
+
+    <div class="flex-row-bf" id="dotsContainer"></div>
+
+    <div class="line"></div>
+
+    <div class="frame">
+      <label for="commentInput" class="add-comment-sub">Comment</label>
+      <textarea id="commentInput" class="comment-input-box" placeholder="Write your comment here..."></textarea>
+    </div>
+
+    <div class="button-row">
+      <a href="dashboard.html" class="btn-cancel">Cancel</a>
+      <button class="btn-save" id="saveBtn">Save</button>
+    </div>
+  </main>
+
+  <script src="js/task_comment.js"></script>
+</body>
+</html>
