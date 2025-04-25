@@ -1,34 +1,9 @@
 # Group6
-to run backend
-cd backend
-npm install 
-download mysql for local testing https://dev.mysql.com/downloads/mysql/
+Roomi is a mobile-friendly web application designed to help flatmates efficiently manage shared household tasks. The app allows users to register, log in, assign chores, track task progress, leave comments, upload completion photos, and rate each other’s contributions. It aims to promote fairness, transparency, and communication in shared living spaces.
 
-after installing mysql:
-open settings
-go to bottom and click mysql
-click start server 
-open terminal
-sudo /usr/local/mysql/support-files/mysql.server start
+The application is deployed on an Amazon EC2 server and is fully database-driven using Node.js, Express, and MySQL. The backend handles user authentication, task management, file uploads, and comment systems through RESTful API endpoints. All data is securely stored and validated.
 
-if this doesnt work:
-export PATH="/usr/local/mysql/bin:$PATH"
-sudo /usr/local/mysql/support-files/mysql.server start
+You can access the live version of the application here:
+🔗 http://ec2-34-249-11-135.eu-west-1.compute.amazonaws.com/login.html
 
-then:
-/usr/local/mysql/bin/mysql -u root -p
-type in the passwort you made when installing mysql
-
-make database using the createTables.sql file
-default mysql port 3306
-run node app.js
-
-4 apis:
-post
-http://localhost:3000/api/users/login
-post
-http://localhost:3000/api/users/register
-post
-http://localhost:3000/api/tasks/createTask
-get
-http://localhost:3000/api/tasks/getTasks
+Best viewed on a mobile device or narrow screen.
