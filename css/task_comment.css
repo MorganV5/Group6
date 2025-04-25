@@ -1,0 +1,203 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fafafa;
+    color: #333;
+  }
+  
+  .main-container {
+    padding: 24px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .slideshow-container-comment {
+    width: 100%;
+    height: 260px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .slideshow-container-comment img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+  
+  .flex-row-aa {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+  }
+  
+  .flex-row-aa img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+  }
+  
+  .date-time {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .flex-row-bf {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  
+  .flex-row-bf .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #d0d0d0;
+  }
+  
+  .flex-row-bf .dot.active {
+    background-color: #333;
+  }
+  
+  .line {
+    border-bottom: 1px solid #ddd;
+    margin: 24px 0;
+  }
+  
+  .frame {
+    margin-bottom: 24px;
+  }
+  
+  .add-comment-sub {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .comment-input-box {
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 14px;
+    resize: vertical;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s ease;
+  }
+  
+  .comment-input-box:focus {
+    border-color: #4a61f9;
+    outline: none;
+  }
+  
+  .button-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  
+  .btn-cancel,
+  .btn-save {
+    flex: 1;
+    padding: 14px 0;
+    font-size: 16px;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .btn-cancel {
+    background-color: white;
+    border: 1px solid #ccc;
+    color: #333;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .btn-save {
+    background-color: #1e40af;
+    color: white;
+    border: none;
+  }
+  
+  .btn-save:hover {
+    background-color: #2b57d4;
+  }
+  
+/* Tab Bar */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 402px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 70px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #e0e0e0;
+  z-index: 999;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tab-item img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(10%) saturate(500%)
+    hue-rotate(180deg) brightness(90%) contrast(90%);
+}
+
+.tab-item span {
+  font-size: 11px;
+  color: #888;
+}
+
+.tab-item.active span {
+  color: #0096ff;
+}
+
+.tab-item.active img {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%)
+    hue-rotate(190deg) brightness(100%) contrast(110%);
+}
+
+  @media (max-width: 500px) {
+    .main-container {
+      padding: 16px;
+    }
+  
+    .comment-input-box {
+      min-height: 80px;
+    }
+  }
+  

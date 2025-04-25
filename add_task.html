@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add New Task</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #fff;
+      padding: 0 10px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #1e40af;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-weight: bold;
+      margin: 10px 0 5px;
+      font-size: 14px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: #f3f4f6;
+      font-size: 14px;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .cancel {
+      background: white;
+      border: 1px solid #888;
+      color: #333;
+    }
+
+    .register {
+      background-color: #1e40af;
+      color: white;
+      border: none;
+    }
+
+    @media (min-width: 500px) {
+      .buttons {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .btn {
+        width: 48%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Add New Task</h2>
+    <form id="addTaskForm">
+      <label for="name">Task Name</label>
+      <input type="text" id="name" placeholder="Enter task name" required />
+
+      <label for="description">Description</label>
+      <textarea id="description" placeholder="Enter details..."></textarea>
+
+      <label for="due_date">Due Date</label>
+      <input type="datetime-local" id="due_date" required />
+
+      <label for="repeat_frequency">Repeat Frequency</label>
+      <select id="repeat_frequency">
+        <option value="">-- Select Frequency --</option>
+      </select>
+
+      <label for="area_id">Area</label>
+      <select id="area_id">
+        <option value="">-- Select Area --</option>
+      </select>
+
+      <label for="assigned_to_id">Assign To</label>
+      <select id="assigned_to_id">
+        <option value="">-- Select User --</option>
+      </select>
+
+      <div class="buttons">
+        <button type="button" class="btn cancel" onclick="window.location.href='dashboard.html'">Cancel</button>
+        <button type="submit" class="btn register">Add Task</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const loadUsers = async () => {
+      const res = await fetch("/users");
+      const users = await res.json();
+      const select = document.getElementById("assigned_to_id");
+      select.innerHTML = '<option value="">-- Select User --</option>';
+      users.forEach(user => {
+        const option = document.createElement("option");
+        option.value = user.id;
+        option.textContent = user.name;
+        select.appendChild(option);
+      });
+    };
+
+    const loadAreas = async () => {
+      const res = await fetch("/areas");
+      const areas = await res.json();
+      const select = document.getElementById("area_id");
+      select.innerHTML = '<option value="">-- Select Area --</option>';
+      areas.forEach(area => {
+        const option = document.createElement("option");
+        option.value = area.id;
+        option.textContent = area.name;
+        select.appendChild(option);
+      });
+    };
+
+    const loadFrequencies = async () => {
+      const res = await fetch("/frequencies");
+      const freqs = await res.json();
+      const select = document.getElementById("repeat_frequency");
+      select.innerHTML = '<option value="">-- Select Frequency --</option>';
+      freqs.forEach(freq => {
+        const option = document.createElement("option");
+        option.value = freq.id;
+        option.textContent = freq.frequency;
+        select.appendChild(option);
+      });
+    };
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      await loadUsers();
+      await loadAreas();
+      await loadFrequencies();
+    });
+
+    document.getElementById("addTaskForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const creator_id = localStorage.getItem("userId");
+      if (!creator_id) {
+        alert("You must be logged in.");
+        return;
+      }
+      const task = {
+        name: document.getElementById("name").value,
+        description: document.getElementById("description").value,
+        due_date: document.getElementById("due_date").value,
+        repeat_frequency: document.getElementById("repeat_frequency").value,
+        area_id: document.getElementById("area_id").value,
+        creator_id: creator_id,
+        assigned_to_id: document.getElementById("assigned_to_id").value || null
+      };
+      try {
+        const res = await fetch("/tasks", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(task)
+        });
+        const result = await res.json();
+        if (res.ok) {
+          alert("✅ Task added successfully!");
+          window.location.href = "dashboard.html";
+        } else {
+          alert("❌ Error: " + result.message);
+        }
+      } catch (err) {
+        alert("❌ Server error. Try again later.");
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

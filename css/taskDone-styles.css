@@ -1,0 +1,1014 @@
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+  
+.main-container {
+  background-color: #ffffff; 
+  padding-bottom: 100px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.app-container {
+  width: 100%;
+  max-width: 402px;
+  margin: 0 auto;
+  background-color: white;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+
+/* Tab Bar */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 402px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 70px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #e0e0e0;
+  z-index: 999;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tab-item img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(10%) saturate(500%)
+    hue-rotate(180deg) brightness(90%) contrast(90%);
+}
+
+.tab-item span {
+  font-size: 11px;
+  color: #888;
+}
+
+.tab-item.active span {
+  color: #0096ff;
+}
+
+.tab-item.active img {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%)
+    hue-rotate(190deg) brightness(100%) contrast(110%);
+}
+/* Bottom navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+  border-top: 1px solid #E5E7EB;
+  z-index: 100;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  color: gray;
+  font-size: 14px;
+  text-align: center;
+}
+
+.bottom-nav .active {
+  color: #007aff;
+  font-weight: bold;
+}
+/*--------------------------------------*/
+
+/* Task Image Section */
+.task-image {
+  width: 100%;
+  height: 340px;
+  background-color: #0096ff;
+  position: relative;
+  background-image: url('Images/furniture.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.back-button {
+  position: absolute;
+  top: 71px;
+  left: 17px;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Task Content Section */
+.task-content {
+  padding: 36px;
+  position: relative;
+}
+
+.task-title {
+  font-size: 32px;            /* 原来是 28px */
+  color: #000000;
+  font-weight: 600;
+  margin-bottom: 28px;
+}
+
+.task-info {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.info-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+}
+
+.info-label {
+  font-size: 14px;             /* 原来是 12px */
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.info-value {
+  display: flex;
+  align-items: center;
+  font-size: 18px;             /* 原来是 15px */
+  font-weight: 600;
+  color: #007aff;
+}
+
+.avatar {
+  width: 40px;                 /* 原来是 32px */
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* Task Description Section */
+.task-description {
+  margin-bottom: 30px;
+}
+
+.task-description h2 {
+  font-size: 18px;
+  color: #505458;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.task-description p {
+  font-size: 13px;
+  color: #505458;
+  line-height: 1.5;
+}
+
+/* Task Actions */
+.task-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  position: absolute;
+  bottom: -150px;
+  width: calc(100% - 56px);
+}
+
+.exchange-button {
+  width: 153px;
+  height: 49px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  color: #888;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.complete-button {
+  width: 153px;
+  height: 49px;
+  background-color: #0096ff;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Permission Dialog Styles */
+.permission-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.permission-dialog {
+  width: 300px;
+  background-color: white;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.permission-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.permission-message {
+  text-align: center;
+  padding: 0 20px 20px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.permission-buttons {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+.permission-buttons button {
+  flex: 1;
+  padding: 15px 0;
+  font-size: 18px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.deny-button {
+  border-right: 1px solid #ddd;
+  color: #888;
+}
+
+.allow-button {
+  color: #888;
+  font-weight: medium;
+}
+
+/* Permission Dialog Button Active States */
+.allow-button:active {
+  background-color: rgba(0, 132, 255, 0.2);
+}
+
+.deny-button:active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* --------------taskDone_Gallery---------- */
+
+/* Gallery specific styles to add to your existing CSS file */
+
+/* Gallery Container */
+.gallery-container {
+  background-color: white;
+  height: 150vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Gallery Header */
+.gallery-header {
+  padding-top: 50px; /* Space for status bar */
+  background-color: white;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.gallery-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  height: 50px;
+}
+
+.cancel-btn-gallery {
+  color: #888;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.tabs {
+  display: flex;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tab {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.tab.active {
+  background-color: white;
+  font-weight: 500;
+}
+
+.choose-btn {
+  all: unset;
+  color: #4cd964;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.choose-btn:not(.active) {
+  color: #888;
+}
+
+/* Photo Grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background-color: white;
+  overflow-y: auto;
+  /* height: calc(100% - 150px); */
+}
+
+.photo-item {
+  position: relative;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  background-color: #ddd;
+  margin: 0%;
+  padding: 0%;
+  border: none;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: static;
+}
+
+.photo-item.selected::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  background-color: #4cd964;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.photo-item.selected::before {
+  content: '✓';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+/* --------------taskDone_Comment1---------- */
+
+/* cancel-btn */
+.cancel-btn {
+  color: #888;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+/* Title */
+.add-comment {
+  display: block;
+  margin: 80px 0 0 28px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #505458;
+  line-height: 29px;
+}
+
+/* Image box */
+.slideshow-container-comment {
+  width: 346px;
+  height: 295px;
+  margin: 12px 0 0 28px;
+  border-radius: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-wrapperaaa {
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: none;
+}
+
+.slide.active {
+  opacity: 1;
+  display: block;
+}
+
+.comment-photoaaa {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 40px;
+  display: block;
+}
+/* Timestamp row */
+.flex-row-aa {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.date-time {
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  text-align: right;
+  line-height: 18px;
+  margin-right: 8px;
+}
+
+.layer {
+  width: 31px;
+  height: 29px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Decorative dots */
+.flex-row-bf {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ellipse {
+  width: 8px;
+  height: 8px;
+  background: #000000;
+  border-radius: 50%;
+}
+
+.ellipse.active {
+  background: #ccc;
+}
+
+.frame {
+  margin: 22px 0 0 28px;
+  width: 346px;
+}
+
+.line {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.add-comment-sub {
+  font-size: 18px;
+  font-weight: 500;
+  color: #505458;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* Input */
+.comment-input-box {
+  width: 346px;
+  height: 80px;
+  border-radius: 12px;
+  border: none;
+  background-color: #f4f7fb;
+  padding: 14px;
+  font-size: 13px;
+  color: #505458;
+  resize: none;
+}
+
+/* Buttons */
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 28px 0;
+}
+
+.btn-cancel,
+.btn-save {
+  width: 163px;
+  height: 49px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: white;
+  border: 1px solid #5f6368;
+  color: #5f6368;
+}
+
+.btn-save {
+  background: #0096ff;
+  border: none;
+  color: white;
+}
+
+/* Input container styles */
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Text input overlay */
+.input-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 346px;
+  height: 80px;
+  border-radius: 12px;
+  background-color: #f4f7fb;
+  padding: 14px;
+  font-size: 13px;
+  color: #888;
+  cursor: text;
+  z-index: 2;
+}
+
+/* Hide overlay when input is active */
+.input-overlay.hidden {
+  display: none;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Comment modal */
+.comment-modal {
+  position: fixed;
+  bottom: -800px; /* Start off-screen */
+  left: 0;
+  right: 0;
+  max-width: 402px;
+  margin: 0 auto;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  z-index: 1001;
+  transition: bottom 0.3s ease;
+}
+
+.comment-modal.active {
+  bottom: 0; /* Slide up to visible */
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-header span {
+  font-size: 13px;
+  font-weight: 500;
+  color: #505458;
+}
+
+.close-button {
+  position: absolute;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 20px;
+  height: 559px;
+}
+
+.modal-input {
+  width: 100%;
+  height: 150px;
+  border: none;
+  resize: none;
+  font-size: 13px;
+  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f7fb;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.modal-input:focus {
+  outline: none;
+}
+
+.modal-footer {
+  padding: 0 20px 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* User info style */
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 15px;
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 15px;
+  color: #333;
+  margin-left: 10px;
+}
+
+/* comment box container */
+.comment-box {
+  border-radius: 12px;
+  padding: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 150px;
+}
+
+/* text area style edit */
+.comment-box .modal-input {
+  background-color: transparent;
+  padding: 5px 0;
+  margin-top: 5px;
+  border-radius: 0;
+  height: 80px;
+}
+
+/* Save button */
+.save-button {
+  background-color: #0096ff;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 30px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 45%;
+  transform: translateY(-50%);
+}
+
+/* trigger button style */
+.comment-trigger {
+  width: 346px;
+  height: 80px;
+  border-radius: 12px;
+  border: none;
+  background-color: #f4f7fb;
+  padding: 14px;
+  font-size: 13px;
+  color: #888;
+  cursor: pointer;
+}
+
+/*--------------taskDone_Complete----------------*/
+
+/* Back button styling */
+.back-button-complete {
+  all: unset;
+  position: absolute;
+  top: 71px;
+  left: 15px;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 10;
+}
+
+/* Task title styling */
+.task-title {
+  font-size: 28px;
+  color: #000000;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 34px;
+  letter-spacing: -0.17px;
+}
+
+/* Task info panel styling */
+.task-info {
+  background: #f4f4f4;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 9px;
+  color: #505458;
+  margin-bottom: 2px;
+}
+
+.info-value {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Task description styling */
+.task-description {
+  margin-top: 15px;
+}
+
+.task-description p {
+  font-size: 13px;
+  color: #505458;
+  line-height: 1.5;
+  letter-spacing: -0.17px;
+}
+
+.slideshow-container {
+  width: 90%;
+  max-width: 450px;         /* 可调整你希望的最大尺寸 */
+  aspect-ratio: 1 / 1;      /* 保持正方形 */
+  margin: 0 auto;           /* 居中留白 */
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+.comment-photoaaa {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 0 40px 40px;
+}
+
+/* Frame container adjustments */
+.frame {
+  margin: 15px 3px 0;
+  width: auto;
+}
+
+.new-style {
+  background: #f4f4f4;
+  border-radius: 10px;
+  padding: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 20px;
+}
+
+.info-row-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 0 10px;
+}
+
+.info-divider {
+  color: #e0e0e0;
+  font-size: 18px;
+  margin: 0 2px;
+  padding-top: 8px;
+}
+
+.status-completed {
+  color: #22c55d !important;
+}
+
+/* previouse style override */
+.new-style .info-label {
+  font-size: 13px;
+  color: #505458;
+  margin-bottom: 2px;
+}
+
+.new-style .info-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.new-style .avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 3px;
+}
+
+/* Timestamp row */
+.flex-row-aa-complete {
+  position: absolute;
+  top: 71px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+/* 图片横向滚动区域 */
+.slide-wrapper {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 12px;
+  padding: 12px 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 每张图片 */
+.comment-photo {
+  flex-shrink: 0;
+  width: 420px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 40px;
+  scroll-snap-align: start;
+  background-color: #eee;
+}
+/* 悬浮返回按钮样式 */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  text-decoration: none;
+}
+
+.back-arrow {
+  width: 40px;
+  height: 40px;
+  background-color: #F3F4F6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4B5563;
+}
+
+.back-arrow:hover {
+  background-color: #E5E7EB;
+}

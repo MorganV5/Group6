@@ -1,0 +1,265 @@
+.main-container {
+  width: 402px;
+  height: 100vh;
+  max-height: 842px;
+  margin: 0 auto;
+  background: #ffffff;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  overflow-y: hidden;
+  padding-bottom: 70px;
+}
+
+.back-button {
+  position: absolute;
+  top: 71px;
+  left: 17px;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.task-title {
+  font-size: 24px;
+  color: #000000;
+  font-weight: medium;
+  margin-bottom: 20px;
+}
+
+.task-info {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.info-label {
+  font-size: 9px;
+  color: #999999;
+  margin-bottom: 5px;
+}
+
+.info-value {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color: #505458;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+}
+
+.tab.active {
+  background-color: white;
+  font-weight: 500;
+}
+
+.slide-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.slide.active {
+  opacity: 1;
+  display: block;
+}
+
+.comment-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 40px;
+  display: block;
+}
+
+.date-time {
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  text-align: right;
+  line-height: 18px;
+  margin-right: 8px;
+}
+
+.layer {
+  width: 31px;
+  height: 29px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ellipse.active {
+  background: #ccc;
+}
+
+.frame {
+  margin: 22px 0 0 28px;
+  width: 346px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.comment-modal.active {
+  bottom: 0; /* Slide up to visible */
+}
+
+.comment-box {
+  background-color: #f5f7fb;
+  border-radius: 12px;
+  padding: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 150px;
+}
+
+.task-title {
+  font-size: 28px;
+  color: #000000;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 34px;
+  letter-spacing: -0.17px;
+}
+
+.task-info {
+  background: #f4f4f4;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.info-label {
+  font-size: 9px;
+  color: #505458;
+  margin-bottom: 2px;
+}
+
+.info-value {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+}
+
+.slideshow-container {
+  width: 100%;
+  height: 460px;
+  margin: 0;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.comment-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 0 40px 40px;
+}
+
+.frame {
+  margin: 20px 28px 0;
+  width: auto;
+}
+
+.new-style {
+  background: #f4f4f4;
+  border-radius: 10px;
+  padding: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 20px;
+}
+
+.info-row-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 0 10px;
+}
+
+.info-divider {
+  color: #e0e0e0;
+  font-size: 18px;
+  margin: 0 2px;
+  padding-top: 8px;
+}
+
+.status-completed {
+  color: #22c55d !important;
+}
+
+.new-style .avatar {
+  width: 20px;
+  height: 20px;
+  margin-right: 3px;
+}
+
+.flex-row-aa-complete {
+  position: absolute;
+  top: 71px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+}
+  /* 底部导航栏 */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-top: 1px solid #E5E7EB;
+    z-index: 100;
+  }
+  
+  .bottom-nav a {
+    text-decoration: none;
+    color: gray;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav-icon {
+    margin-bottom: 5px;
+  }
+  
+  .bottom-nav .active {
+    color: #1E40AF;
+    font-weight: bold;
+  }

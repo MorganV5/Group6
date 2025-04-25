@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Roomi Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #007aff;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #F3F4F6;
+            font-size: 16px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            width: 48%;
+            padding: 12px 0;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .cancel {
+            background-color: white;
+            border: 1px solid #888;
+            color: #333;
+        }
+
+        .register {
+            background-color: #007aff;
+            color: white;
+            border: none;
+        }
+
+        .cancel:hover {
+            background-color: #f0f0f0;
+        }
+
+        .register:hover {
+            background-color: #007aff;
+        }
+
+        @media screen and (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            input {
+                font-size: 14px;
+                padding: 10px;
+            }
+            .btn {
+                font-size: 14px;
+                padding: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="logo">
+            <img src="roomi.png" alt="Roomi Logo" style="height: 30px;">
+        </h1>
+        <form id="step1Form">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="flat_code">Flat Code</label>
+            <input type="text" id="flat_code" name="flatCode" required>
+
+            <div class="buttons">
+                <button type="button" class="btn cancel" onclick="window.location.href='login.html'">Cancel</button>
+                <button type="submit" class="btn register">Next</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("step1Form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // 获取表单数据
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const flatCode = document.getElementById("flat_code").value;
+
+            // 存储到 localStorage（或 sessionStorage）
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+            localStorage.setItem("flatCode", flatCode);
+
+            // 跳转到第二步页面
+            window.location.href = "register-step2.html";
+        });
+    </script>
+
+</body>
+</html>
+

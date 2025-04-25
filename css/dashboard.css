@@ -1,0 +1,250 @@
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F8FAFC;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* 主容器 */
+  .container {
+    width: 90%;
+    max-width: 500px;
+    padding: 20px 20px 80px 20px;
+    margin: 0 auto;
+  }
+  
+  /* 标题样式 */
+  h2 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+  }
+  
+  .subtitle {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  /* 筛选器样式 */
+  .task-filter {
+    display: flex;
+    background-color: #E5E7EB;
+    border-radius: 20px;
+    padding: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .task-filter button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+  }
+  
+  .task-filter .active {
+    background-color: #007aff;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* 任务列表 */
+  .task-list,
+  .completed-tasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* 单个任务卡片 */
+  .task-item {
+    display: flex;
+    align-items: center;
+    background-color: #F3F4F6;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    gap: 12px;
+  }
+  
+  .task-item.completed {
+    color: #9ca3af;
+    text-decoration: line-through;
+  }
+  
+  /* 圆圈状态 */
+  .circle {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007aff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .task-item.completed .circle {
+    background-color: #007aff;
+    color: white;
+  }
+  
+  .task-item.completed .circle::before {
+    content: "✔";
+    font-size: 13px;
+  }
+  
+  /* 任务文字区 */
+  .task-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .task-name {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .due-text {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
+  }
+  
+  .due-text.overdue {
+    color: #e11d48;
+  }
+  
+  /* 箭头图标 */
+  .chevron {
+    font-size: 20px;
+    color: #9ca3af;
+    margin-left: auto;
+  }
+  
+  /* 添加任务按钮 */
+  #addTask {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    background-color: #007aff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  #addTask:hover {
+    background-color: #007aff;
+  }
+  
+  /* 底部导航栏 */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-top: 1px solid #E5E7EB;
+    z-index: 100;
+  }
+  
+  .bottom-nav a {
+    text-decoration: none;
+    color: gray;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav-icon {
+    margin-bottom: 5px;
+  }
+  
+  .bottom-nav .active {
+    color: #007aff;
+    font-weight: bold;
+  }
+  
+/* Tab Bar */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 402px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 70px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #e0e0e0;
+  z-index: 999;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tab-item img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(10%) saturate(500%)
+    hue-rotate(180deg) brightness(90%) contrast(90%);
+}
+
+.tab-item span {
+  font-size: 11px;
+  color: #888;
+}
+
+.tab-item.active span {
+  color: #0096ff;
+}
+
+.tab-item.active img {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%)
+    hue-rotate(190deg) brightness(100%) contrast(110%);
+}
+
+  /* 响应式适配 */
+  @media screen and (max-width: 480px) {
+    .container {
+      width: 95%;
+      padding: 16px;
+    }
+  
+    h2 {
+      font-size: 22px;
+    }
+  
+    .task-filter button {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+  

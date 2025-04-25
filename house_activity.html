@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Activity</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+    }
+
+    #activityList {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .task-card {
+      max-width: 340px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 16px;
+      margin: 20px auto;
+      position: relative;
+    }
+
+    .task-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin-right: 12px;
+      object-fit: cover;
+    }
+
+    .task-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .task-subtitle {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .status {
+      background: #dff5e1;
+      color: #27ae60;
+      padding: 2px 8px;
+      font-size: 12px;
+      border-radius: 8px;
+      margin-left: 6px;
+    }
+
+    .photo-container {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .task-photo {
+      width: 100%;
+      height: 300px; /* 👈 固定高度，比如200px */
+      object-fit: cover; /* 👈 保持图片比例，超出的部分裁剪 */
+      display: block;
+      border-radius: 12px;
+    }
+
+
+    .timestamp {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+
+    .stars {
+      margin-top: 10px;
+      font-size: 20px;
+      color: gold;
+    }
+
+    .comment-btn {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+      /* 底部导航栏 */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-top: 1px solid #E5E7EB;
+    z-index: 100;
+  }
+  
+  .bottom-nav a {
+    text-decoration: none;
+    color: gray;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav-icon {
+    margin-bottom: 5px;
+  }
+  
+  .bottom-nav .active {
+    color: #007aff;
+    font-weight: bold;
+  }
+  #activityList {
+  max-width: 800px;
+  margin: auto;
+  padding-bottom: 100px; /* 👈 增加底部空间 */
+}
+
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">House Activity</h2>
+<div id="activityList">Loading...</div>
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="dashboard.html">
+      <div class="nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 14V5M9 21v-3M15 14V5M15 21v-3M19 5H5M19 14H5"/></svg>
+      </div>
+      Your Tasks
+    </a>
+    <a href="house_activity.html"class="active">
+      <div class="nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      House Activity
+    </a>
+    <a href="flat.html">
+      <div class="nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      Flat
+    </a>
+  </nav>
+  <script>
+    async function loadCards() {
+      const container = document.getElementById("activityList");
+      try {
+        const res = await fetch("/api/all-task-photos"); // 后端接口
+        const data = await res.json();
+  
+        container.innerHTML = data.map(item => {
+          // 日期处理
+          let timeStr = "Unknown time";
+          if (item.completion_date && item.completion_time) {
+            const datePart = item.completion_date.split('T')[0];
+            timeStr = `${datePart} ${item.completion_time}`;
+          }
+  
+          return `
+            <div class="task-card">
+              <div class="task-header">
+                <img class="avatar" src="${item.profile_picture || '/img/default.png'}" />
+                <div>
+                  <div class="task-title">${item.task_name}</div>
+                  <div class="task-subtitle">Who: ${item.user_name} <span class="status">${item.status}</span></div>
+                </div>
+              </div>
+  
+              <a href="task_photo_detail.html?photoId=${item.photo_id}">
+                <div class="photo-container">
+                  <img class="task-photo" src="${item.photo_url}" />
+                  <div class="timestamp">🕒 ${timeStr}</div>
+                </div>
+              </a>
+            </div>
+          `;
+        }).join("");
+  
+      } catch (err) {
+        console.error("❌ Failed to load cards:", err);
+        container.innerHTML = "❌ Failed to load activity list.";
+      }
+    }
+  
+    loadCards();
+  </script>
+  
+</body>
+</html>
